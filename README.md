@@ -1,2 +1,22 @@
 # MannyCRM
 New CRM based on SpinaCRM
+
+## Roadmap
+
+- [ ] Create a new CRM project
+- [ ] Create the skeleton of the project in a extendable way
+- [ ] Support Container Image
+
+## Install Requirements
+
+- [X] Rails 6.1.4.4
+- [X] Ruby 3.2.6
+- [X] Spina 2.6.2
+
+## Setup your Ruby environment
+```bash
+just setup-debian # For Debian-based Linux Machines
+just setup-mac # For Mac Machines
+```
+You can also use `make` instead of `just`, like `make setup-dev-linux` or `make setup-dev-mac`.
+If you don't know what `just` is, please check [here](https://just.systems/).
