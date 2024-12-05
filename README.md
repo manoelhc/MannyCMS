@@ -18,5 +18,5 @@ New CRM based on SpinaCRM
 just setup-debian # For Debian-based Linux Machines
 just setup-mac # For Mac Machines
 ```
-You can also use `make` instead of `just`, like `make setup-dev-linux` or `make setup-dev-mac`.
+You can also use `make` instead of `just`, like `make setup-debian` or `make setup-mac`.
 If you don't know what `just` is, please check [here](https://just.systems/).
