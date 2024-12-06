@@ -1,0 +1,57 @@
+services:
+    postgres:
+        image: postgres:15
+        environment:
+            POSTGRES_USER: manny
+            POSTGRES_PASSWORD: manny
+            POSTGRES_DB: manny
+        ports:
+            - "5432:5432"
+        #volumes:
+        #    - ./data:/var/lib/postgresql/data
+
+    init-db:
+        build:
+            context: .
+            args:
+                - RAILS_ENV=development
+                - RAILS_VERSION=${RAILS_VERSION}
+                - SPINA_VERSION=${SPINA_VERSION}
+                - PORT=3030
+        command:
+            - sh
+            - -c
+            - "rails db:create active_storage:install db:migrate; rails g spina:install; rails db:seed"
+
+        environment:
+            DATABASE_URL: postgres://manny:manny@postgres:5432/manny
+        depends_on:
+            postgres:
+                condition: service_started
+    manny-crm:
+        build:
+            context: .
+            args:
+                - RAILS_ENV=development
+                - RAILS_VERSION=${RAILS_VERSION}
+                - SPINA_VERSION=${SPINA_VERSION}
+                - PORT=3030
+        ports:
+            - "3030:3030"
+        volumes:
+            - ./MannyCRM:/app
+        command: ["rails", "server", "-b", "0.0.0.0", "-p", "3030"]
+        develop:
+            watch:
+                - action: sync
+                  path: ./MannyCRM
+                  target: /app
+        environment:
+            DATABASE_URL: postgres://manny:manny@postgres:5432/manny
+            RAILS_ENV: development
+            PORT: 3030
+        depends_on:
+            postgres:
+                condition: service_started
+            init-db:
+                condition: service_completed_successfully

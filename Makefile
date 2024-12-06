@@ -21,4 +21,15 @@ setup-ruby-tools:
 	       mise use --global "ruby@${RUBY_VERSION}"; \
 		   gem update --system; \
 		   gem install bundler; \
+	       gem install rails -v "${RAILS_VERSION}"; \
+		   gem install spina -v "${SPINA_VERSION}"; \
 		   bundler install
+
+run:
+	SPINA_VERSION=${SPINA_VERSION} RAILS_VERSION=${RAILS_VERSION} docker-compose up -d
+
+stop:
+	docker-compose down
+
+build: stop
+	SPINA_VERSION=${SPINA_VERSION} RAILS_VERSION=${RAILS_VERSION} docker-compose build
