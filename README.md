@@ -3,9 +3,9 @@ New CRM based on SpinaCRM
 
 ## Roadmap
 
-- [ ] Create a new CRM project
-- [ ] Create the skeleton of the project in a extendable way
-- [ ] Support Container Image
+- [X] Create a new CRM project
+- [X] Create the skeleton of the project in an extendable way
+- [X] Support Container Image
 
 ## Install Requirements
 
