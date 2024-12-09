@@ -26,10 +26,10 @@ setup-ruby-tools:
 		   bundler install
 
 run:
-	SPINA_VERSION=${SPINA_VERSION} RAILS_VERSION=${RAILS_VERSION} docker-compose up -d
+	SPINA_VERSION=${SPINA_VERSION} RAILS_VERSION=${RAILS_VERSION} docker-compose up --build
 
 stop:
 	docker-compose down
 
 build: stop
-	SPINA_VERSION=${SPINA_VERSION} RAILS_VERSION=${RAILS_VERSION} docker-compose build
+	SPINA_VERSION=${SPINA_VERSION} RAILS_VERSION=${RAILS_VERSION} docker-compose build -it

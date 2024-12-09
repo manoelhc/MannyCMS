@@ -21,14 +21,14 @@ services:
         command:
             - sh
             - -c
-            - "rails db:create active_storage:install db:migrate; rails g spina:install; rails db:seed"
+            - "rails db:create active_storage:install db:migrate; rails g spina:install; rails db:migrate db:seed"
 
         environment:
-            DATABASE_URL: postgres://manny:manny@postgres:5432/manny
+            DATABASE_URL: "postgres://manny:manny@postgres:5432/manny"
         depends_on:
             postgres:
                 condition: service_started
-    manny-crm:
+    manny-cms:
         build:
             context: .
             args:
@@ -39,15 +39,15 @@ services:
         ports:
             - "3030:3030"
         volumes:
-            - ./MannyCRM:/app
+            - ./MannyCMS:/app
         command: ["rails", "server", "-b", "0.0.0.0", "-p", "3030"]
         develop:
             watch:
                 - action: sync
-                  path: ./MannyCRM
+                  path: ./MannyCMS
                   target: /app
         environment:
-            DATABASE_URL: postgres://manny:manny@postgres:5432/manny
+            DATABASE_URL: "postgres://manny:manny@postgres:5432/manny"
             RAILS_ENV: development
             PORT: 3030
         depends_on:
