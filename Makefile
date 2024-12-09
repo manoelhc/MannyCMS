@@ -6,11 +6,12 @@ setup-debian: setup-dev-debian setup-ruby-tools
 setup-mac: setup-dev-mac setup-ruby-tools
 
 setup-dev-debian:
-	sudo apt-get install -y autoconf patch build-essential rustc libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libgmp-dev libncurses5-dev libffi-dev libgdbm6 libgdbm-dev libdb-dev uuid-dev || true
+	sudo apt-get install -y nodejs autoconf patch build-essential rustc libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libgmp-dev libncurses5-dev libffi-dev libgdbm6 libgdbm-dev libdb-dev uuid-dev || true
+	npm install --global yarn
 
 setup-dev-mac:
 	xcode-select --install || true
-	brew install openssl@3 readline libyaml gmp autoconf rust || true
+	brew install openssl@3 readline libyaml gmp autoconf rust "node@20" || true
 
 setup-ruby-tools:
 	curl https://mise.run | sh
@@ -20,4 +21,15 @@ setup-ruby-tools:
 	       mise use --global "ruby@${RUBY_VERSION}"; \
 		   gem update --system; \
 		   gem install bundler; \
+	       gem install rails -v "${RAILS_VERSION}"; \
+		   gem install spina -v "${SPINA_VERSION}"; \
 		   bundler install
+
+run:
+	SPINA_VERSION=${SPINA_VERSION} RAILS_VERSION=${RAILS_VERSION} docker-compose up --build
+
+stop:
+	docker-compose down
+
+build: stop
+	SPINA_VERSION=${SPINA_VERSION} RAILS_VERSION=${RAILS_VERSION} docker-compose build -it
