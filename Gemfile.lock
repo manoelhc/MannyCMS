@@ -148,7 +148,7 @@ GEM
       racc (~> 1.4)
     pg (1.5.9)
     racc (1.8.1)
-    rack (2.2.13)
+    rack (2.2.18)
     rack-rewrite (1.5.1)
     rack-test (2.1.0)
       rack (>= 1.3)
