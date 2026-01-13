@@ -199,7 +199,7 @@ GEM
     regexp_parser (2.9.3)
     request_store (1.7.0)
       rack (>= 1.4)
-    rexml (3.3.9)
+    rexml (3.4.2)
     ruby-vips (2.2.2)
       ffi (~> 1.12)
       logger
